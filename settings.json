@@ -1,0 +1,10 @@
+{
+    "Resources":{
+        "CHR2_1000Genome":"Resources/chr2_phase3"
+    },
+
+    "Data":{
+        "data_prefix":"Data/CHR2_LGI1_QC",
+        "merged_data":"Data/GWAS_merged"
+    }
+}
