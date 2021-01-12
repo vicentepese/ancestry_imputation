@@ -7,6 +7,16 @@ OUTPUT=$(jq -r '.Data.merged_data' settings.json)
 plink2 --zst-decompress $THOU_DATA.pgen.zst > $THOU_DATA.pgen
 plink2 --zst-decompress $THOU_DATA.pvar.zst > $THOU_DATA.pvar
 
+# Convert to binary ped
+plink2 --pfile $THOU_DATA --make-bed --rm-dup --out tst
+
+# Merge 
+plink --bfile $DATA --pmerge $THOU_DATA --make-bed --out tst 
+
+
+
+########### SCRATCH 3###########
+
 # Convert to VCF
 plink2 --pfile $THOU_DATA --export vcf --out $THOU_DATA
 
@@ -25,6 +35,3 @@ rm temp
 
 # Exclude multiallelic
 plink2 --pfile $THOU_DATA --exclude-snps $multiallele_exclude --rm-dup exclude-all --make-bed --out tst
-
-# Merge 
-plink --pfile $THOU_DATA --bmerge $DATA --out tst 
