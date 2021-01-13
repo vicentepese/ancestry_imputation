@@ -15,6 +15,15 @@ def merge_data(settings):
     # Merge data through PLINK 
     subprocess.call('bash ' + settings.sh_scripts.merge, shell = True)
 
+def compute_pca(settings):
+
+    # Compute PCA 
+    subprocess.call('bash' + settings.sh_scripts.pca, shell = True)
+
+def plot_pca(settings):
+
+    # Plot PCA
+
 def main():
 
     # Read settings
