@@ -33,3 +33,9 @@ for (i in 1:nrow(sample.info)){
     
   }
 }
+
+# Create dataframe 
+sample.ethnicity <- data.frame("Sample" = sample.info$Sample, "Population" = superpop) 
+
+# Wwrite 
+write.table(sample.ethnicity, file = settings$Resources$thougen_ethnicity, quote = FALSE, sep = ',', row.names = FALSE, col.names = TRUE)
