@@ -1,9 +1,13 @@
 {
     "Resources":{
         "CHR2_1000Genome":"Resources/all_phase3_QC_BIALLELIC",
-        "PCA":"Resources/pca",
+        "PCA_eigenvec":"Resources/pca.eigenvec",
         "list_snps":"Resources/list.snps",
-        "remove_snps":"Resources/remove.snps"
+        "remove_snps":"Resources/remove.snps",
+        "thougen_sample":"Resources/20130606_sample_info.xlsx",
+        "data_ethnicity":"Resources/data_ethnicity.csv",
+        "thougen_ethnicity":"Resources/thougen_ethnicity.csv"
+
     },
 
     "Data":{
