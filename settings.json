@@ -5,13 +5,13 @@
         "list_snps":"Resources/list.snps",
         "remove_snps":"Resources/remove.snps",
         "thougen_sample":"Resources/20130606_sample_info.xlsx",
-        "data_ethnicity":"Resources/data_ethnicity.csv",
+        "data_ethnicity":"Outputs/data_ethnicity.csv",
         "thougen_ethnicity":"Resources/thougen_ethnicity.csv"
 
     },
 
     "Data":{
-        "data_prefix":"LGI1_QC",
+        "data_prefix":"CHR2_LGI1_QC",
         "merged_data":"GWAS_merged"
     }
 }
