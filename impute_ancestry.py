@@ -1,3 +1,25 @@
+#!/usr/bin/env python
+"""Computes ethnicity by mapping chromsomes 2 and 3 to 1000 Genome
+
+- Merges data and 1000 Genomes .bed files taking common SNPs of CHR 2 and 3
+    based on position.
+- Computes Principal Component Analysis (PCA)
+- Computes the Euclidean distance of each subject's PC1 and PC2, to the 
+    mean of PCs of each 1000 Genome ethnicity (each ethnicity has a "mean").
+- The closest ethnicity mean is considered as the ethnicity of the subject.
+- Plots PCA based on ethnicity.
+
+NOTE: Some subjects from 1000 Genome may be labeled as an etnicity, far from the mean.
+"""
+
+__author__ = "Vicente Peris Sempere"
+__credits__ = ["Vicente Peris Sempere"]
+__license__ = "GPL"
+__version__ = "3.0"
+__maintainer__ = "Vicente Peris Sempere"
+__email__ = "vipese@stanford.edu"
+__status__ = "Finalized"
+
 import numpy as np
 import subprocess
 import json
@@ -11,16 +33,35 @@ import seaborn as sns
 import pandas as pd
 
 def merge_data(settings):
+    """ Calls a bash script that merges the data throuh PLINK
+    Input:
+        - settings: settings JSON file
+    Output:
+        - Merged files (Data folder)
+    """
 
     # Merge data through PLINK 
     subprocess.call('bash sh_scripts/merge_bed.sh', shell = True)
 
 def compute_pca(settings):
+    """Calls a bash script that computes PCA through PLINK
+    Input:
+        - settings: settings JSON file
+    Output:
+        - PCs (Resources folder)
+    """
 
     # Compute PCA 
     subprocess.call('bash sh_scripts/pca.sh' , shell = True)
 
 def compute_ethnicity(settings):
+    """ Computes etnicity as the closest euclidean distance of each 
+        subject's PCs to each 1000 Genome PCs ethnicity mean.
+    Inputs: 
+        - settings: settings JSON file 
+    Outputs:
+        - Ethnicity of Input Data (Resources folder) 
+    """
 
     # Read PCA 
     PCA = pd.read_csv(settings.Resources.PCA_eigenvec, header = None, delim_whitespace = True)
@@ -64,6 +105,12 @@ def compute_ethnicity(settings):
 
 
 def plot_pca(settings):
+    """ Plots the PCs of merged data, and colors by ethnicity.
+    Input:
+        - settings: settings JSON file 
+    Output:
+        - PCA plot (ancestry_PCA.png)
+    """
 
     # Read PCs
     PCA = pd.read_csv(settings.Resources.PCA_eigenvec, header = None, delim_whitespace = True)
