@@ -1,6 +1,6 @@
 {
     "Resources":{
-        "CHR2_1000Genome":"Resources/all_phase3_QC_BIALLELIC",
+        "CHR2_1000Genome":"Resources/chr2_3_phase3_QC_BIALLELIC",
         "PCA_eigenvec":"Resources/pca.eigenvec",
         "list_snps":"Resources/list.snps",
         "remove_snps":"Resources/remove.snps",
@@ -11,7 +11,7 @@
     },
 
     "Data":{
-        "data_prefix":"Data/LGI1_QC",
-        "merged_data":"Data/GWAS_merged"
+        "data_prefix":"LGI1_QC",
+        "merged_data":"GWAS_merged"
     }
 }

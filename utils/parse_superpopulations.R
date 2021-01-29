@@ -20,15 +20,15 @@ for (i in 1:nrow(sample.info)){
   subj <- sample.info[i,]
   
   # Get superpopulation 
-  if (subj$Population %in% c("CDX","CHB","JPT","KHV")){
+  if (subj$Population %in% c("CHB","JPT","CHS","CDX", "KHV")){
     superpop <- c(superpop, "EAS")
-  } else if (subj$Population %in% c("CHS","BEB","GIH","ITU","PJL","STU")){
+  } else if (subj$Population %in% c("GIH","PJL","BEB","STU","ITU")){
     superpop <- c(superpop, "SAS")
-  } else if (subj$Population %in% c("ASW","ACB","ESN","GWD","LWK","MSL","YRI")){
+  } else if (subj$Population %in% c("YRI","LWK","GWD","MSL","ESN","ASW","ACB")){
     superpop <- c(superpop, "AFR")
-  } else if (subj$Population %in% c("GBR","FIN","IBS","TSI","CEU")){
+  } else if (subj$Population %in% c("CEU","TSI","FIN","GBR","IBS")){
     superpop <- c(superpop, "EUR")
-  } else if (subj$Population %in% c("CLM","MXL", "PEL", "PUR")){
+  } else if (subj$Population %in% c("MXL","PUR", "CLM", "PEL")){
     superpop <- c(superpop, "AMR")
     
   }
