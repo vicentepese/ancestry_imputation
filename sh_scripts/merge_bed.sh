@@ -22,8 +22,18 @@ awk 'FNR==NR{a[NR]=$2;next}{$2=a[FNR]}1' filt_1000gen.bim filt_tempdata.bim > ts
 # Merge attempt
 plink --bfile filt_tempdata --bmerge filt_1000gen --out Data/$OUTPUT
 
-# Remove multiallelic
-plink --bfile filt_1000gen --exclude Data/$OUTPUT.missnp --make-bed --out Data/$OUTPUT
+# If issue with alleles, filter independently and merge 
+if test -f "Data/$OUTPUT.missnp"; then 
+    # Remove multiallelic
+    plink --bfile filt_tempdata --exclude  Data/$OUTPUT.missnp --make-bed --out tst
+    for i in tst.*; do mv "$i" "filt_tempdata.${i##*.}"; done
+
+    plink --bfile filt_1000gen --exclude Data/$OUTPUT.missnp --make-bed --out tst
+    for i in tst.*; do mv "$i" "filt_1000gen.${i##*.}"; done
+
+    # Merge
+    plink --bfile filt_tempdata --bmerge filt_1000gen --make-bed --out Data/$OUTPUT
+fi 
 
 # Remove 
 rm -r *temp*

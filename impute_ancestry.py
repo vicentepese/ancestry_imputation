@@ -144,8 +144,8 @@ def main():
     # # Compute PCA
     # compute_pca(settings)
 
-    # Compute etnicities
-    compute_ethnicity(settings)
+    # # Compute etnicities
+    # compute_ethnicity(settings)
 
     # Plot PCA
     plot_pca(settings)
