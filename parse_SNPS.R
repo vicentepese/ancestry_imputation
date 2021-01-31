@@ -32,24 +32,24 @@ colnames(gen.bim) <- c("chr", "rsid", "len", "pos", "A1", "A2")
 rsdids <- data.frame()
 
 # Parse CHR2
-for (CHR in c(2,3)){
-  data.bim <- data.bim %>% filter(chr == CHR)
-  gen.bim <- gen.bim %>% filter(chr == CHR)
+for (CHR in c(2)){
+  data.bim_chr <- data.bim %>% filter(chr == CHR)
+  gen.bim_chr <- gen.bim %>% filter(chr == CHR)
   
   # Remove duplicated position
-  data.bim <- data.bim[!(duplicated(data.bim$pos) | duplicated(data.bim$pos, fromLast = TRUE)), ]
-  gen.bim <- gen.bim[!(duplicated(gen.bim$pos) | duplicated(gen.bim$pos, fromLast = TRUE)), ]
+  data.bim_chr <- data.bim_chr[!(duplicated(data.bim_chr$pos) | duplicated(data.bim_chr$pos, fromLast = TRUE)), ]
+  gen.bim_chr <- gen.bim_chr[!(duplicated(gen.bim_chr$pos) | duplicated(gen.bim_chr$pos, fromLast = TRUE)), ]
   
   # Remove duplicated rsIDS
-  data.bim <- data.bim[!(duplicated(data.bim$rsid) | duplicated(data.bim$rsid, fromLast = TRUE)), ]
-  gen.bim <- gen.bim[!(duplicated(gen.bim$rsid) | duplicated(gen.bim$rsid, fromLast = TRUE)), ]
+  data.bim_chr <- data.bim_chr[!(duplicated(data.bim_chr$rsid) | duplicated(data.bim_chr$rsid, fromLast = TRUE)), ]
+  gen.bim_chr <- gen.bim_chr[!(duplicated(gen.bim_chr$rsid) | duplicated(gen.bim_chr$rsid, fromLast = TRUE)), ]
   
   # Parse common SNPs based on position 
-  common.snps <- intersect(data.bim$pos, gen.bim$pos)
+  common.snps <- intersect(data.bim_chr$pos, gen.bim_chr$pos)
   
   # Get common rsIDs
-  rsids.data <- data.bim %>% filter(pos %in% common.snps) %>% .["rsid"]
-  rsids.gen <- gen.bim %>% filter(pos %in% common.snps) %>% .["rsid"]
+  rsids.data <- data.bim_chr %>% filter(pos %in% common.snps) %>% .["rsid"]
+  rsids.gen <- gen.bim_chr %>% filter(pos %in% common.snps) %>% .["rsid"]
   
   # Create dataframe 
   rsdids <- rbind(rsdids, data.frame(Data = rsids.data, Gen = rsids.gen))
