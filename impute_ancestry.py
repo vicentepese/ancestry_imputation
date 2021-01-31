@@ -138,14 +138,14 @@ def main():
     # Read settings
     settings = pd.read_json("settings.json")
 
-    # # Merge data with CHR of 1000 Genome
-    # merge_data(settings)
+    # Merge data with CHR of 1000 Genome
+    merge_data(settings)
 
-    # # Compute PCA
-    # compute_pca(settings)
+    # Compute PCA
+    compute_pca(settings)
 
-    # # Compute etnicities
-    # compute_ethnicity(settings)
+    # Compute etnicities
+    compute_ethnicity(settings)
 
     # Plot PCA
     plot_pca(settings)
