@@ -1,5 +1,9 @@
 # Ancestry Imputation
 
+## Requirements
+This pipeline requires: 
+> python 3.6.8 or higher
+> plink 1.90 
 
 ## Introduction 
 This repository attempts to impute the ethnicity provided a set of binary PLINK files. It utilizes the [1000 Genomes Phase 3 Data](https://www.internationalgenome.org/data) and its [Associated Data](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3). 
@@ -16,6 +20,20 @@ The pipeline is composed by three main steps:
 
 ## Utilization
 
+To run the pipeline, please follow the next steps:
+1. Copy the input data to the *Data* folder.
+2. Copy the 1000 Genome binary PLINK files to the *Resources* folder.
+3. Fill the `settings.json` file according the Settings section.
+4. Run `python impute_ancestry.py`
+
+### Settings
+Please fill up the following items in `settings.json`:
+* ***Resources***
+  * *CHR2_1000Genome*: Relative or full path to the binary PLINK files of 1000 Genomes (*without extension, only the prefix*).
+* ***Data***:
+  * *prefix*: Prefix/name of the input data.
+
+## Utils
 
 ## Warnings and Future Work 
 
