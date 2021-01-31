@@ -35,6 +35,10 @@ Please fill up the following items in `settings.json`:
 
 ## Utils
 
+### `parse_superpopulations.R`
+
+This function is designed to parse the 1000 Genome superpopulations based on the  [Associated Data](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3). The function does not need to be ran, given that superpopulations have been provided in the pipeline and are located in the *Resources* folder. 
+
 ## Warnings and Future Work 
 
 The pipeline does not currently support flipping variants. Multiallelic and flipped variants are removed.
