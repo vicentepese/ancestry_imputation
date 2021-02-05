@@ -124,7 +124,6 @@ def plot_pca(settings):
 
     # Merge with PCA
     PCA = pd.merge(PCA, ethnicity[['IID', 'Population']], on='IID')
-    PCA = PCA[PCA.IID.isin(data_ethn.IID)]
     
     # Plot PCs
     sns.color_palette("tab10")
