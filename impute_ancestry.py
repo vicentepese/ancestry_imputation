@@ -65,7 +65,8 @@ def compute_ethnicity(settings):
 
     # Read PCA 
     PCA = pd.read_csv(settings.Resources.PCA_eigenvec, header = None, delim_whitespace = True)
-    PCA.columns = ['FID', 'IID'] + ['PC' + str(x) for x in range(1,21)]
+    PC_ids = ['PC' + str(x) for x in range(1,21)]
+    PCA.columns = ['FID', 'IID'] + PC_ids
 
     # Read 1000 Genome Ethnicity 
     thougen_ethn = pd.read_csv(settings.Resources.thougen_ethnicity, header = 0)
@@ -78,11 +79,11 @@ def compute_ethnicity(settings):
         # Get PCAs from ethnicity
         PCA_eth = PCA_genome[PCA_genome.IID.isin(thougen_ethn[thougen_ethn.Population.eq(eth)].IID)]
 
-        # Compute mean of PC1 and PC2
-        PC1_mu, PC2_mu = PCA_eth.PC1.mean(), PCA_eth.PC2.mean()
+        # Compute mean of PCs
+        PCs_mu = PCA_eth[PC_ids].apply(lambda x: np.mean(x), axis = 0)
 
         # Append to dataframe 
-        mu_eth[eth] = [PC1_mu, PC2_mu]
+        mu_eth[eth] = PCs_mu
 
     # Initialize for loop
     PCA_subj = PCA[~PCA.IID.isin(thougen_ethn.IID)]
@@ -94,7 +95,7 @@ def compute_ethnicity(settings):
         for eth in mu_eth.columns:
 
             # Compute euclidean distance and append
-            dist_subj_eth.append(euclidean(value[["PC1", "PC2"]], mu_eth[eth]))
+            dist_subj_eth.append(euclidean(value[PC_ids], mu_eth[eth]))
 
         # Append ethnicity
         subj_eth = subj_eth.append(pd.DataFrame({"FID": [value.FID], "IID": [value.IID], \
@@ -123,6 +124,7 @@ def plot_pca(settings):
 
     # Merge with PCA
     PCA = pd.merge(PCA, ethnicity[['IID', 'Population']], on='IID')
+    PCA = PCA[PCA.IID.isin(data_ethn.IID)]
     
     # Plot PCs
     sns.color_palette("tab10")
